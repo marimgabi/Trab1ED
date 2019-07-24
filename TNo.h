@@ -16,7 +16,7 @@ template <typename T> class TNo{
 };
 
 template<typename T> TNo<T>::TNo(){
-   info = (T)0;
+   //info = (T)0;
    prox = nullptr;
 }
 
