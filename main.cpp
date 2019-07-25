@@ -37,7 +37,7 @@ vector <string> converte(vector <string> tokens){
     for (int i=0; i<(int)tokens.size(); i++){
         string c = tokens[i];
 
-        if (isalpha(c[0]) && isupper(c[0]) || isdigit(c[0]) || c == "p"){
+        if (isalpha(c[0]) && isupper(c[0]) || isdigit(c[0]) || c == "p" || c == "_"){
             polonesa.push_back(c);
 
         }if (c == "+" || c == "-" || c == "*" || c == "/" || c == "^"){
@@ -79,7 +79,11 @@ vector<string> tokenizacao(string expressao){
                     tokens.push_back(string(1, 'p'));
                     i++;
                 }else tokens.push_back(string(1, c));
-        }if (c == '+' || c == '-' || c == '*' || c == '/' || c == '^' || c == '(' || c == ')'){
+        }if (c == '-'){
+            if (i == 0 || expressao[i-1] == '('){
+                    tokens.push_back(string(1, '_'));
+            }else tokens.push_back(string(1, c));
+        }if (c == '+' || c == '*' || c == '/' || c == '^' || c == '(' || c == ')'){
             tokens.push_back(string(1, c));
         }if (isalpha(c)){
             if (c == 'l'){
@@ -151,17 +155,14 @@ double computa(vector<string>polonesa){
             double num = topo + topod;
             pilha->push(num);
         }if(polonesa[i] == "-"){
-            if(pilha->size() == 1){
-                double topo = pilha->pop();
-                double num = -topo;
-                pilha->push(num);
-            }else{
                 double topo = pilha->pop();
                 double topod = pilha->pop();
                 double num = topod - topo;
                 pilha->push(num);
-            }
-
+        }if(polonesa[i] == "_"){
+                double topo = pilha->pop();
+                double num = -topo;
+                pilha->push(num);
         }if(polonesa[i] == "*"){
             double topo = pilha->pop();
             double topod = pilha->pop();
@@ -228,7 +229,7 @@ int main(){
     vector<string> polonesa = converte(tokens);
 
     double n = computa(polonesa);
-    cout << "Resultado =" << n << endl;
+    cout << "Resultado = " << n << endl;
 
     return 0;
 }
