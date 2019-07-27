@@ -80,7 +80,7 @@ vector<string> tokenizacao(string expressao){
                     i++;
                 }else tokens.push_back(string(1, c));
         }if (c == '-'){
-            if (i == 0 || expressao[i-1] == '('){
+            if (i == 0 || expressao[i-1] == '(' || expressao[i-1] == '+' || expressao[i-1] == '*' || expressao[i-1] == '/' || expressao[i-1] == '^' ){
                     tokens.push_back(string(1, '_'));
             }else tokens.push_back(string(1, c));
         }if (c == '+' || c == '*' || c == '/' || c == '^' || c == '(' || c == ')'){
@@ -221,6 +221,7 @@ int main(){
     "\t Cosseno: cos()" << endl <<
     "\t Tangente: tan()" << endl <<
     "\t Raiz quadrada: sqrt()" << endl <<
+    "\t Modulo: abs()" << endl <<
     "---------------------------------------------------------------------------------------------------------------"<< endl <<
     "Insira a expressao numerica" << endl;
     cin >> expressao;
